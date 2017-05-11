@@ -5,28 +5,19 @@ class Solution(object):
         :type amount: int
         :rtype: int
         """
-        if amount == 0:
-            return 0
-
-        if min(coins) > amount:
-            return -1
-
         amount_list = []
         amount_list = [-1] * (amount + 1)
         amount_list[0] = 0
 
-        for i in range(1, amount + 1):
+        for i in range(amount + 1):
             for c in coins:
                 if c <= i:
                     prev = amount_list[i - c]
 
-                    if (prev != -1 and
-                       (amount_list[i] == -1 or prev + 1 < amount_list[i])):
+                    if prev != -1 and (amount_list[i] == -1 or prev + 1 < amount_list[i]):
                         amount_list[i] = prev + 1
 
         return amount_list[amount]
-
-
 
 if __name__ == '__main__':
     s = Solution()
