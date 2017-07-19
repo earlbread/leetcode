@@ -4,16 +4,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        current_max = nums[0]
         maximum = nums[0]
-        max_i = 0
-        max_j = 1
 
-        for i in range(len(nums)):
-            for j in range(i + 1, len(nums) + 1):
-                s = sum(nums[i:j])
-                if s > maximum:
-                    maximum = s
-                    max_i = i
-                    max_j = j
+        for i in range(1, len(nums)):
+            current_max = max(nums[i], current_max + nums[i])
+            maximum = max(current_max, maximum)
 
-        return sum(nums[max_i:max_j])
+        return maximum
