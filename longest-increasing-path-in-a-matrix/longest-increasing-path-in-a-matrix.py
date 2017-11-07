@@ -9,21 +9,22 @@ class Solution(object):
                 return l[row][col]
 
             dirs = [(-1, 0), (1, 0), (0, -1,), (0, 1)]
-            max_path = 0
+            max_path = 1
 
             for d in dirs:
                 r = row + d[0]
                 c = col + d[1]
 
-                if r < 0 or c < 0 or r >= len(matrix) or c >= len(matrix[0]):
+                if (r < 0 or c < 0 or
+                    r >= len(matrix) or c >= len(matrix[0]) or
+                    matrix[r][c] > matrix[row][col]):
                     continue
 
-                if matrix[r][c] > matrix[row][col]:
-                    path = pathLen(matrix, l, r, c)
-                    max_path = max(path, max_path)
+                path = pathLen(matrix, l, r, c)
+                max_path = max(path, max_path)
 
-            l[row][col] = max_path + 1
-            return l[row][col]
+            l[row][col] = max_path
+            return max_path
 
         if not matrix:
             return 0
