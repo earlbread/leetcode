@@ -11,21 +11,8 @@ class Solution(object):
         if len(words1) != len(words2):
             return False
 
-        h = defaultdict(list)
-
-        for pair in pairs:
-            h[pair[0]].append(pair[1])
-            h[pair[1]].append(pair[0])
-
-        for word1, word2 in zip(words1, words2):
-            if word1 == word2:
-                continue
-            if h.get(word1) is None or h.get(word2) is None:
-                return False
-            if not (word2 in h.get(word1) or word1 in h.get(word2)):
-                return False
-
-        return True
+        return all(w1 == w2 or [w1, w2] in pairs or [w2, w1] in pairs
+                   for w1, w2 in zip(words1, words2))
 
 
 s = Solution()
